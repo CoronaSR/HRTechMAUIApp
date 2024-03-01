@@ -22,6 +22,7 @@ namespace HR_Tech_Blazor
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<IUsuariosService, UsuariosService>();
+            builder.Services.AddSingleton<IEmpleadoService, EmpleadoService>();
             return builder.Build();
         }
     }

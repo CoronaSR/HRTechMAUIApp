@@ -1,5 +1,8 @@
 ﻿@page "/addUpdateUsuario"
+@page "/updateUsuario/{IdUsuario:int}"
 
+@using HR_Tech_Blazor.Services
+@inject IUsuariosService usuarioService
 <h3>Agregar o Editar Usuario</h3>
 
 <div>
@@ -31,13 +34,58 @@
 </div>
 
 @code {
-    private string nombre;
-    private string apellido;
-    private string puesto;
-    private string usuario;
-    private string contraseña;
+    [Parameter]
+    public int IdUsuario { get; set; }
+
+    private string ?nombre;
+    private string ?apellido;
+    private string ?puesto;
+    private string ?usuario;
+    private string ?contraseña;
+
+    protected async override Task OnInitializedAsync() {
+        if (IdUsuario > 0) {
+            var response = await usuarioService.GetUsuarioById(IdUsuario);
+            if(response != null) {
+                nombre = response.Nombre;
+                apellido= response.Apellido;
+                puesto = response.Puesto;
+                usuario = response.Usuario;
+                contraseña = response.Contraseña;
+            }
+        }
+    }
 
     private async void AddUsuarioRecord(){
-        await App.Current.MainPage.DisplayAlert("Button clicked", "Boton presionado", "OK");
+        Models.Usuarios user = new Models.Usuarios()
+        {
+            Nombre = nombre,
+            Apellido = apellido,
+            Puesto = puesto,
+            Usuario = usuario,
+            Contraseña = contraseña,
+            IdUsuario = IdUsuario
+        };
+
+        int response = -1;
+
+        if (IdUsuario > 0) {
+            //Editar
+            response = await usuarioService.UpdateUsuario(user);
+        }
+        else {
+            //Agregar
+            response = await usuarioService.AddUsuario(user);
+        }
+
+        if (response > 0) {
+            nombre = apellido = puesto = usuario = contraseña = string.Empty;
+            this.StateHasChanged();
+            await App.Current.MainPage.DisplayAlert("Usuario guardado", "Guardado en la tabla usuarios", "OK");
+        }
+        else {
+            await App.Current.MainPage.DisplayAlert("Oops", "Algo salió mal al insertar el usuario", "OK");
+        }
+
     }
 }

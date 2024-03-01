@@ -1,0 +1,107 @@
+﻿@page "/addEmpleado"
+@page "/updateEmpleado/{IdEmpleado:int}"
+
+@using HR_Tech_Blazor.Services
+@inject IEmpleadoService empleadoService
+<h3>Agregar o Editar Empleado</h3>
+
+<div>
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input @bind="nombre" type="text" class="form-control" id="nombre" aria-describedby="nombreHelp">
+        <div id="nombreHelp" class="form-text">Introduce el nombre</div>  
+    </div>
+    <div class="mb-3">
+        <label for="apellido" class="form-label">Apellidos</label>
+        <input @bind="apellido" type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp">
+        <div id="apellidoHelp" class="form-text">Introduce el apellido</div>  
+    </div>
+    <div class="mb-3">
+        <label for="puesto" class="form-label">Puesto</label>
+        <input @bind="puesto" type="text" class="form-control" id="puesto" aria-describedby="puestoHelp">
+        <div id="puestoHelp" class="form-text">Introduce el puesto</div>  
+    </div>
+    <div class="mb-3">
+        <label for="departamento" class="form-label">Departamento</label>
+        <input @bind="departamento" type="text" class="form-control" id="departamento" aria-describedby="departamentoHelp">
+        <div id="departamentoHelp" class="form-text">Introduce el departamento</div>
+    </div>
+    <div class="mb-3">
+        <label for="diasDeVacaciones" class="form-label">Dias de vacaciones</label>
+        <input @bind="diasDeVacaciones" type="number" class="form-control" id="diasDeVacaciones" aria-describedby="diasDeVacacionesHelp">
+        <div id="diasDeVacacionesHelp" class="form-text">Introduce los dias de vacaciones</div>
+    </div>
+    <div class="mb-3">
+        <label for="usuario" class="form-label">Usuario</label>
+        <input @bind="usuario" type="text" class="form-control" id="usuario" aria-describedby="usuarioHelp">
+        <div id="usuarioHelp" class="form-text">Introduce el usuario</div>  
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input @bind="contraseña" type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" @onclick="AddEmpleadoRecord" class="btn btn-primary">Submit</button>
+</div>
+
+@code {
+    [Parameter]
+    public int IdEmpleado { get; set; }
+
+    private string ?nombre;
+    private string ?apellido;
+    private string ?puesto;
+    private string ?usuario;
+    private string ?contraseña;
+    private string ?departamento;
+    private int diasDeVacaciones;
+
+    protected async override Task OnInitializedAsync() {
+        if (IdEmpleado > 0) {
+            var response = await empleadoService.GetEmpleadoById(IdEmpleado);
+            if(response != null) {
+                nombre = response.Nombre;
+                apellido= response.Apellido;
+                puesto = response.Puesto;
+                usuario = response.Usuario;
+                contraseña = response.Contraseña;
+                departamento = response.Departamento;
+                diasDeVacaciones = response.DiasDeVacaciones;
+            }
+        }
+    }
+
+    private async void AddEmpleadoRecord() {
+        Models.Empleados empleado = new Models.Empleados() {
+            Nombre = nombre,
+            Apellido = apellido,
+            Puesto = puesto,
+            Usuario = usuario,
+            Contraseña = contraseña,
+            Departamento = departamento,
+            DiasDeVacaciones = diasDeVacaciones,
+            IdEmpleado = IdEmpleado
+        };
+
+        int response = -1;
+
+        if (IdEmpleado > 0) {
+            //Editar
+            response = await empleadoService.UpdateEmpleado(empleado);
+        }
+        else {
+            //Agregar
+            response = await empleadoService.AddEmpleado(empleado);
+        }
+
+        if (response > 0) {
+            nombre = apellido = puesto = usuario = contraseña = departamento = string.Empty;
+            diasDeVacaciones = 0;
+            this.StateHasChanged();
+            await App.Current.MainPage.DisplayAlert("Empleado guardado", "Guardado en la tabla Empleados", "OK");
+        }
+        else {
+            await App.Current.MainPage.DisplayAlert("Oops", "Algo salió mal al insertar el empleado", "OK");
+        }
+
+    }
+}

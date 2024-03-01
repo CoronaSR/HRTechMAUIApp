@@ -1,0 +1,71 @@
+﻿@page "/usuarios"
+@using HR_Tech_Blazor.Services
+@inject IUsuariosService UsuarioService
+@inject NavigationManager NavManager
+
+<h3>Usuarios</h3>
+
+<p>Lista de los usuarios registrados</p>
+<div class="row">
+    <div class="col-6 offset-6">
+        <NavLink class="nav-link" href="addUpdateUsuario">
+            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Agregar
+        </NavLink>
+    </div>
+</div>
+
+@if(usuarios == null){
+    <p><em>Loading...</em></p>
+}else{
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Puesto</td>
+                    <td>Usuario</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in usuarios) {
+                    <tr>
+                        <td>@usuario.Nombre</td>
+                        <td>@usuario.Apellido</td>
+                        <td>@usuario.Puesto</td>
+                        <td>@usuario.Usuario</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" @onclick="@(e => EditUser(usuario.IdUsuario))">Edit</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" @onclick="@(e => DeleteUser(usuario))" >Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+}
+
+@code {
+    private List<Models.Usuarios> usuarios;
+
+    protected override async Task OnInitializedAsync(){
+        usuarios = await UsuarioService.GetAllUsuarios();
+    }
+
+    private async void DeleteUser(Models.Usuarios usuario) {
+        var response = await UsuarioService.DeleteUsuario(usuario);
+        if (response > 0) {
+            await OnInitializedAsync();
+            this.StateHasChanged();
+        }
+    }
+
+    private void EditUser(int IdUsuario) {
+        NavManager.NavigateTo($"updateUsuario/{IdUsuario}");
+    }
+}

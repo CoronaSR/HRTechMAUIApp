@@ -1,5 +1,50 @@
 ﻿@page "/"
+@using HR_Tech_Blazor.Services
+@inject IUsuariosService usuarioService
+@inject NavigationManager NavManager
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<h1>Hola, Inicia Sesión para continuar!</h1>
+
+@if (errorMessage != null)
+{
+    <p style="color: red;">@errorMessage</p>
+}
+
+<div class="form-group">
+    <label for="usuario" class="form-label">Usuario</label>
+    <input @bind="usuario" type="text" class="form-control" id="usuario" aria-describedby="usuarioHelp">
+    <div id="usuarioHelp" class="form-text">Introduce el usuario</div>  
+</div>
+<div class="mt-3 form-group">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input @bind="contraseña" type="password" class="form-control" id="exampleInputPassword1">
+</div>
+
+<button type="submit" @onclick="Login" class="btn btn-primary">Submit</button>
+
+@code {
+    private string usuario;
+    private string contraseña;
+    private string errorMessage;
+
+    private async void Login()
+    {
+        var response = await usuarioService.GetUsuarioLogin(usuario, contraseña);
+
+        // Perform login logic here
+        if (response != null)
+        {
+            // Successful login
+            // Redirect or perform other actions as needed
+            // For example, navigate to another page:
+            NavManager.NavigateTo("/usuarios");
+        }
+        else
+        {
+            // Failed login
+            errorMessage = "Usuario o contraseña inválidos.";
+            this.StateHasChanged();
+        }
+    }
+}

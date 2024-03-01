@@ -1,0 +1,75 @@
+﻿@page "/empleados"
+@using HR_Tech_Blazor.Services
+@inject IEmpleadoService EmpleadoService
+@inject NavigationManager NavManager
+
+<h3>Empleados</h3>
+
+<p>Lista de los empleados registrados</p>
+<div class="row">
+    <div class="col-6 offset-6">
+        <NavLink class="nav-link" href="addEmpleado">
+            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Agregar
+        </NavLink>
+    </div>
+</div>
+
+@if(empleados == null){
+    <p><em>Loading...</em></p>
+}else{
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Puesto</td>
+                    <td>Departamento</td>
+                    <td>Dias</td>
+                    <td>Usuario</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var empleado in empleados) {
+                    <tr>
+                        <td>@empleado.Nombre</td>
+                        <td>@empleado.Apellido</td>
+                        <td>@empleado.Puesto</td>
+                        <td>@empleado.Departamento</td>
+                        <td>@empleado.DiasDeVacaciones</td>
+                        <td>@empleado.Usuario</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" @onclick="@(e => EditEmpleado(empleado.IdEmpleado))">Edit</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" @onclick="@(e => DeleteEmpleado(empleado))" >Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+}
+
+@code {
+    private List<Models.Empleados> empleados;
+
+    protected override async Task OnInitializedAsync(){
+        empleados = await EmpleadoService.GetAllEmpleados();
+    }
+
+    private async void DeleteEmpleado(Models.Empleados empleado) {
+        var response = await EmpleadoService.DeleteEmpleado(empleado);
+        if (response > 0) {
+            await OnInitializedAsync();
+            this.StateHasChanged();
+        }
+    }
+
+    private void EditEmpleado(int IdEmpleado) {
+        NavManager.NavigateTo($"updateEmpleado/{IdEmpleado}");
+    }
+}

@@ -38,5 +38,15 @@ namespace HR_Tech_Blazor.Services
         public async Task<List<Usuarios>> GetAllUsuarios() {
             return await _dbConnection.Table<Usuarios>().ToListAsync();
         }
+
+        public async Task<Usuarios> GetUsuarioById(int IdUsuario) {
+            var usuario = await _dbConnection.QueryAsync<Usuarios>($"SELECT * FROM {nameof(Usuarios)} WHERE IdUsuario = {IdUsuario} ");
+            return usuario.FirstOrDefault();
+        }
+
+        public async Task<Usuarios> GetUsuarioLogin(string Usuario, string Contraseña) {
+            var usuario = await _dbConnection.QueryAsync<Usuarios>($"SELECT * FROM {nameof(Usuarios)} WHERE Usuario = '{Usuario}' AND Contraseña = '{Contraseña}' ");
+            return usuario.FirstOrDefault();
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace HR_Tech_Blazor.Services
 {
     public interface IUsuariosService {
         Task<List<Usuarios>> GetAllUsuarios();
+        Task<Usuarios> GetUsuarioById(int IdUsuario);
+        Task<Usuarios> GetUsuarioLogin(string Usuario, string Contraseña);
         Task<int> AddUsuario(Usuarios usuario);
         Task<int> UpdateUsuario(Usuarios usuario);
         Task<int> DeleteUsuario(Usuarios usuario);
