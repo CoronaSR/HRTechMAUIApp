@@ -1,1 +1,1 @@
-C:\Users\User\source\repos\CoronaSR\HRTechMAUIApp\HR Tech Blazor\HR Tech Blazor.csproj;x64
+C:\Users\yudit\OneDrive\Documentos\Enrique\Varios\inge\10\HRTechMAUIApp\HR Tech Blazor\HR Tech Blazor.csproj;x64

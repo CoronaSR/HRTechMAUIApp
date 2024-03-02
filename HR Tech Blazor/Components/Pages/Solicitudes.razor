@@ -1,0 +1,75 @@
+﻿@page "/solicitudes"
+
+@using System.Collections.ObjectModel
+@using Firebase.Database
+@using HR_Tech_Blazor.Models
+@using HR_Tech_Blazor.Services
+<h3>Solicitudes</h3>
+<div class="row">
+    <div class="col-6 offset-6">
+        <NavLink class="nav-link" href="addSolicitud">
+            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Agregar
+        </NavLink>
+    </div>
+</div>
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Motivo</td>
+                <td>Dias solicitados</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Items) {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Motivo</td>
+                    <td>@item.DiasSolicitados</td>
+                    <!-- Add more table cells if needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    public List<Solicitud> Items { get; set; } = new List<Solicitud>();
+
+    protected override void OnInitialized() {
+        FirebaseClient firebaseClient = new FirebaseClient(baseUrl: "https://hrtechapp-46b85-default-rtdb.firebaseio.com/");
+
+        var observable = firebaseClient
+          .Child("Solicitud")
+          .AsObservable<SolicitudWrapper>()
+          .Subscribe(d => {
+          if (d.Object != null) {
+              var itemdb = d.Object; // Obtener el objeto Solicitud
+
+              // Acceder a los campos de la solicitud
+              var item1 = itemdb.Item1; // Acceder al nodo "Item1"
+              var diasSolicitados = item1.DiasSolicitados;
+              var idSolicitud = item1.IdSolicitud;
+              var motivo = item1.Motivo;
+              var status = item1.Status;
+              var nombre = item1.Nombre;
+
+              Solicitud sol = new Solicitud();
+              sol.DiasSolicitados = diasSolicitados;
+              sol.IdSolicitud = idSolicitud;
+              sol.Motivo = motivo;
+              sol.Status = status;
+              sol.Nombre = nombre;
+
+              Items.Add(sol);
+          }
+      });
+
+        this.StateHasChanged();
+    }
+
+    public class SolicitudWrapper {
+        public Solicitud Item1 { get; set; }
+    }
+}

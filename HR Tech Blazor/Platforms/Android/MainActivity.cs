@@ -2,10 +2,8 @@
 using Android.Content.PM;
 using Android.OS;
 
-namespace HR_Tech_Blazor
-{
+namespace HR_Tech_Blazor {
     [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
-    public class MainActivity : MauiAppCompatActivity
-    {
+    public class MainActivity : MauiAppCompatActivity {
     }
 }

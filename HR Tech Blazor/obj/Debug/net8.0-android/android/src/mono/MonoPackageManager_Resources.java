@@ -3,7 +3,9 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "HR Tech Blazor.dll" comes first in this list. */
 		"HR Tech Blazor.dll",
+		"Firebase.dll",
 		"GoogleGson.dll",
+		"LiteDB.dll",
 		"Microsoft.AspNetCore.Authorization.dll",
 		"Microsoft.AspNetCore.Components.dll",
 		"Microsoft.AspNetCore.Components.Forms.dll",
@@ -35,6 +37,7 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Maui.dll",
 		"Microsoft.Maui.Essentials.dll",
 		"Microsoft.Maui.Graphics.dll",
+		"Newtonsoft.Json.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_v2.dll",
 		"SQLitePCLRaw.core.dll",
@@ -43,6 +46,7 @@ public class MonoPackageManager_Resources {
 		"SQLitePCLRaw.provider.e_sqlite3.dll",
 		"SQLitePCLRaw.provider.sqlite3.dll",
 		"System.IO.Pipelines.dll",
+		"System.Reactive.dll",
 		"Xamarin.Android.Glide.dll",
 		"Xamarin.Android.Glide.Annotations.dll",
 		"Xamarin.Android.Glide.DiskLruCache.dll",

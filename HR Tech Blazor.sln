@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR Tech Blazor", "HR Tech Blazor\HR Tech Blazor.csproj", "{C26662D0-E411-435D-BD25-9031AA268B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR Tech Blazor", "HR Tech Blazor\HR Tech Blazor.csproj", "{F4610DA4-F471-40B8-9EE8-45C26F53471D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C26662D0-E411-435D-BD25-9031AA268B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C26662D0-E411-435D-BD25-9031AA268B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C26662D0-E411-435D-BD25-9031AA268B7A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C26662D0-E411-435D-BD25-9031AA268B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C26662D0-E411-435D-BD25-9031AA268B7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C26662D0-E411-435D-BD25-9031AA268B7A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F4610DA4-F471-40B8-9EE8-45C26F53471D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4610DA4-F471-40B8-9EE8-45C26F53471D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4610DA4-F471-40B8-9EE8-45C26F53471D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F4610DA4-F471-40B8-9EE8-45C26F53471D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4610DA4-F471-40B8-9EE8-45C26F53471D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4610DA4-F471-40B8-9EE8-45C26F53471D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

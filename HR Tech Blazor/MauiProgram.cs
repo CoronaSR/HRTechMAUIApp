@@ -1,17 +1,13 @@
 ﻿using HR_Tech_Blazor.Services;
 using Microsoft.Extensions.Logging;
 
-namespace HR_Tech_Blazor
-{
-    public static class MauiProgram
-    {
-        public static MauiApp CreateMauiApp()
-        {
+namespace HR_Tech_Blazor {
+    public static class MauiProgram {
+        public static MauiApp CreateMauiApp() {
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
+                .ConfigureFonts(fonts => {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 

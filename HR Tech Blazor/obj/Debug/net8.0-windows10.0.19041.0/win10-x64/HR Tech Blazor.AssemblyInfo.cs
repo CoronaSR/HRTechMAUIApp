@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("cf63999e-86d7-4b56-90b8-c39c397755a6")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.companyname.hr_tech_blazor")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PublisherName", "User Name")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "HR Tech Blazor")]
@@ -19,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HR Tech Blazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+acfa09337d90802120740681287ca5be1ae905e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+7e7e3ac7a50e75483eef76614e5fec020bbca36f")]
 [assembly: System.Reflection.AssemblyProductAttribute("HR Tech Blazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HR Tech Blazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HR Tech Blazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+acfa09337d90802120740681287ca5be1ae905e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+7e7e3ac7a50e75483eef76614e5fec020bbca36f")]
 [assembly: System.Reflection.AssemblyProductAttribute("HR Tech Blazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HR Tech Blazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
