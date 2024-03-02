@@ -1,0 +1,40 @@
+﻿@page "/addSolicitud"
+
+@using Firebase.Database
+@using HR_Tech_Blazor.Models
+@using Newtonsoft.Json
+<h3>AddSolicitud</h3>
+
+<div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input @bind="nombre" type="text" class="form-control" id="nombre" aria-describedby="nombreHelp">
+    <div id="nombreHelp" class="form-text">Introduce el nombre</div>
+</div>
+<div class="mb-3">
+    <label for="diasDeVacaciones" class="form-label">Dias de vacaciones</label>
+    <input @bind="diasDeVacaciones" type="number" class="form-control" id="diasDeVacaciones" aria-describedby="diasDeVacacionesHelp">
+    <div id="diasDeVacacionesHelp" class="form-text">Introduce los dias de vacaciones</div>
+</div>
+<div class="mb-3">
+    <label for="motivo" class="form-label">Motivo</label>
+    <input @bind="motivo" type="text" class="form-control" id="motivo" aria-describedby="motivoHelp">
+    <div id="motivoHelp" class="form-text">Introduce el motivo</div>
+</div>
+<button type="submit" @onclick="OnCounterClicked" class="btn btn-primary">Submit</button>
+@code {
+    private string? nombre;
+    private string? motivo;
+    private int diasDeVacaciones;
+
+    FirebaseClient firebaseClient = new FirebaseClient(baseUrl: "https://hrtechapp-46b85-default-rtdb.firebaseio.com/");
+
+    private async void OnCounterClicked() {
+        var solicitudSerialized = JsonConvert.SerializeObject((new Solicitud {
+                Nombre = nombre,
+                Motivo = motivo,
+                DiasSolicitados = diasDeVacaciones,
+                Status = true
+            }, Formatting.None));
+        await firebaseClient.Child("Solicitud").PostAsync(solicitudSerialized);
+    }
+}
